@@ -72,7 +72,7 @@ class Craiyon:
 
         url = self.BASE_URL + self.DRAW_API_ENDPOINT
         async with aiohttp.ClientSession() as sess:
-            async with sess.post(url, json={'prompt': prompt, "negative_prompt": negative_prompt, "model": model_type, "token": self.api_token, "version": self.model_version}) as resp:
+            async with sess.post(url, json={'prompt': prompt, "negative_prompt": negative_prompt, "model": model_type, "token": self.api_token, "version": self.model_version},content_type='text/html') as resp:
                 resp = await resp.json()
                 # Add protocol, domain and subdomain (https://img.craiyon.com) to each item as those aren't included in the response by default
                 images = [f"https://img.craiyon.com/{item}" for item in resp['images']]
